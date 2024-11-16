@@ -1,0 +1,65 @@
+﻿@model List<Project2WooxTravel.Entities.Destination>
+<section id="section-1">
+    <div class="content-slider">
+        @{ int index = 1; }
+        @foreach (var destination in Model)
+        {
+            <input type="radio" id="banner@{@index}" class="sec-1-input" name="banner" @(index == 1 ? "checked" : "")>
+            index++;
+        }
+
+        <div class="slider">
+            @{ index = 1; }
+            @foreach (var destination in Model)
+            {
+                <div id="top-banner-@{@index}" class="banner" style="background: url('@destination.ImageUrl') no-repeat center center; background-size: cover;">
+                    <div class="banner-inner-wrapper header-text">
+                        <div class="main-caption">
+                            <h2>@destination.City/@destination.Country</h2>
+                            <h1>@destination.Title</h1>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="more-info">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-sm-6 col-6">
+                                                <i class="fa fa-users"></i>
+                                                <h4><span>Kapasite:</span><br>@destination.Capacity</h4>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-6 col-6">
+                                                <i class="fa fa-calendar-days"></i>
+                                                <h4><span>Gün-Gece:</span><br>@destination.DayNight Gün - @(destination.DayNight-1) Gece</h4>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-6 col-6">
+                                                <i class="fa fa-money-bill"></i>
+                                                <h4><span>Ücret:</span><br>@destination.Price.ToString("C", new System.Globalization.CultureInfo("tr-TR"))</h4>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-6 col-6">
+                                                <div class="main-button">
+                                                    <a href="/Default/DestinationDetail/@destination.DestinationId">İncele</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                index++;
+            }
+        </div>
+
+        <nav>
+            <div class="controls">
+                @{ index = 1; }
+                @foreach (var destination in Model)
+                {
+                    <label for="banner@{@index}"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">@index</span></label>
+                    index++;
+                }
+            </div>
+        </nav>
+    </div>
+</section>

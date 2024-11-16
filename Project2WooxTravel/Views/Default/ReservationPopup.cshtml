@@ -1,0 +1,51 @@
+﻿@model Project2WooxTravel.Entities.Reservation
+<div class="modal fade" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="mb-3"> Rezervasyon Oluştur </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="reservationForm" method="post" action="/Default/ReservationPopup/">
+                    <label>Ad Soyad</label>
+                    <input type="text" class="form-control" name="Name" />
+
+                    <br />
+                    <label>Telefon Numarası</label>
+                    <input type="text" class="form-control" name="Phone" />
+                    <br />
+                    <label>Kişi Sayısı</label>
+                    <input type="text" class="form-control" name="PersonCount" />
+                    <br />
+                    <label>Rezevasyon Tarihi</label>
+                    <input type="text" class="form-control" name="ReservationDate" />
+                    <br />
+                    <label>Rezevasyon İle İlgili Diğer Bilgiler</label>
+                    <input type="text" class="form-control" name="Description" />
+                    <br />
+                    <button class="btn btn-dark"> Rezervasyon Oluştur </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("reservationForm").onsubmit = function (event) {
+        event.preventDefault();
+
+        fetch("/Default/ReservationPopup/", {
+            method: "POST",
+            body: new FormData(this)
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/Default/Index";
+                } else {
+                    alert("Rezervasyon sırasında bir hata oluştu.");
+                }
+            })
+            .catch(error => console.error("Hata:", error));
+    };
+</script>

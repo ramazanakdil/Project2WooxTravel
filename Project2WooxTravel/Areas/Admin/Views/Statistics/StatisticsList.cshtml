@@ -1,0 +1,114 @@
+﻿@model Project2WooxTravel.ViewModel.StatisticsViewModel
+@{
+    ViewBag.Title = "StatisticsList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+
+    <style>
+        .stat-box {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+            .stat-box h4 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .stat-box p {
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            .stat-box:hover {
+                transform: translateY(-5px);
+            }
+    </style>
+}
+
+<div class="container mt-5">
+    <br /><br /><br />
+    <h2 class="text-center mb-4">İstatistikler</h2>
+    <div class="row" style="margin-left:20px;margin-right:20px;">
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-primary text-white">
+                <h4>Toplam Kullanıcı Sayısı</h4>
+                <p>@Model.TotalUser</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-success text-white">
+                <h4>Toplam Rezervasyonlar</h4>
+                <p>@Model.TotalReservations</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-warning text-dark">
+                <h4>Toplam Mesaj Sayısı</h4>
+                <p>@Model.TotalMessages</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-info text-white">
+                <h4>Toplam Destinasyon Sayısı</h4>
+                <p>@Model.DestinationsCount</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-danger text-white">
+                <h4>Toplam Destinasyon Sayısı</h4>
+                <p>@Model.DestinationsCount</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-warning text-white">
+                <h4>Toplam Kullanıcı Sayısı</h4>
+                <p>@Model.TotalUser</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-secondary text-white">
+                <h4>Toplam Rezervasyon Sayısı</h4>
+                <p>@Model.TotalReservations</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-light text-dark">
+                <h4>Toplam Mesaj Sayısı</h4>
+                <p>@Model.TotalMessages</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-dark text-white">
+                <h4>Toplam Kullanıcı Sayısı</h4>
+                <p>@Model.TotalUser</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-info text-white">
+                <h4>Toplam Mesaj Sayısı</h4>
+                <p>@Model.TotalMessages</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-primary text-white">
+                <h4>Toplam Destinasyon Sayısı</h4>
+                <p>@Model.DestinationsCount</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-box bg-success text-white">
+                <h4>Toplam Rezervasyon Sayısı</h4>
+                <p>@Model.TotalReservations</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</div>
+

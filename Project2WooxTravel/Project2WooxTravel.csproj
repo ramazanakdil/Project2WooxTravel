@@ -53,6 +53,12 @@
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -129,17 +135,24 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminLayoutController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CartController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\DestinationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MessageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatisticsController.cs" />
     <Compile Include="Context\TravelContext.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Entities\Admin.cs" />
+    <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Destination.cs" />
+    <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Reservation.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,10 +169,38 @@
     <Compile Include="Migrations\202410101901352_mig3.Designer.cs">
       <DependentUpon>202410101901352_mig3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202410221732331_mig4.cs" />
+    <Compile Include="Migrations\202410221732331_mig4.Designer.cs">
+      <DependentUpon>202410221732331_mig4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202410221744518_mig5.cs" />
+    <Compile Include="Migrations\202410221744518_mig5.Designer.cs">
+      <DependentUpon>202410221744518_mig5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411022036023_mig6.cs" />
+    <Compile Include="Migrations\202411022036023_mig6.Designer.cs">
+      <DependentUpon>202411022036023_mig6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411022048086_mig7.cs" />
+    <Compile Include="Migrations\202411022048086_mig7.Designer.cs">
+      <DependentUpon>202411022048086_mig7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411152000409_mig8.cs" />
+    <Compile Include="Migrations\202411152000409_mig8.Designer.cs">
+      <DependentUpon>202411152000409_mig8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411152005074_mig9.cs" />
+    <Compile Include="Migrations\202411152005074_mig9.Designer.cs">
+      <DependentUpon>202411152005074_mig9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ChartViewModel.cs" />
+    <Compile Include="ViewModel\MessageDestinationViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\creditcart\style.css" />
     <Content Include="colorlib-error-404-6\css\style.css" />
     <Content Include="colorlib-error-404-6\index.html" />
     <Content Include="colorlib-error-404-6\readme.txt" />
@@ -179,6 +220,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="DatPayment-master\DatPayment-master\dist\css\DatPayment.css" />
+    <Content Include="DatPayment-master\DatPayment-master\dist\js\DatPayment.js" />
+    <Content Include="DatPayment-master\DatPayment-master\examples\example.css" />
+    <Content Include="DatPayment-master\DatPayment-master\examples\simple.html" />
+    <Content Include="DatPayment-master\DatPayment-master\Gulpfile.js" />
+    <Content Include="DatPayment-master\DatPayment-master\src\js\DatPayment.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -627,6 +675,77 @@
     <Content Include="Areas\Admin\Views\Destination\DestinationList.cshtml" />
     <Content Include="Areas\Admin\Views\Destination\CreateDestination.cshtml" />
     <Content Include="Areas\Admin\Views\Destination\UpdateDestination.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\Index.cshtml" />
+    <Content Include="Scripts\chart.js" />
+    <Content Include="Scripts\chart.min.js" />
+    <Content Include="wooxtravel-1.0.0\about.html" />
+    <Content Include="wooxtravel-1.0.0\assets\css\animate.css" />
+    <Content Include="wooxtravel-1.0.0\assets\css\flex-slider.css" />
+    <Content Include="wooxtravel-1.0.0\assets\css\fontawesome.css" />
+    <Content Include="wooxtravel-1.0.0\assets\css\owl.css" />
+    <Content Include="wooxtravel-1.0.0\assets\css\templatemo-woox-travel.css" />
+    <Content Include="wooxtravel-1.0.0\assets\images\about-content-bg.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\about-left-image.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\banner-01.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\banner-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\banner-03.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\banner-04.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\best-01.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\best-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\best-03.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\best-04.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\best-05.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\cities-01.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\cities-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\cities-03.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\cities-04.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\country-01.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\country-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\country-03.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\cta-bg.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\deals-01.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\deals-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\deals-03.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\deals-04.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\heading-bg-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\heading-bg.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\logo.png" />
+    <Content Include="wooxtravel-1.0.0\assets\images\offers-01.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\offers-02.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\images\offers-03.jpg" />
+    <Content Include="wooxtravel-1.0.0\assets\js\custom.js" />
+    <Content Include="wooxtravel-1.0.0\assets\js\isotope.js" />
+    <Content Include="wooxtravel-1.0.0\assets\js\isotope.min.js" />
+    <Content Include="wooxtravel-1.0.0\assets\js\owl-carousel.js" />
+    <Content Include="wooxtravel-1.0.0\assets\js\popup.js" />
+    <Content Include="wooxtravel-1.0.0\assets\js\tabs.js" />
+    <Content Include="wooxtravel-1.0.0\deals.html" />
+    <Content Include="wooxtravel-1.0.0\index.html" />
+    <Content Include="wooxtravel-1.0.0\reservation.html" />
+    <Content Include="wooxtravel-1.0.0\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="wooxtravel-1.0.0\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="wooxtravel-1.0.0\vendor\jquery\jquery.js" />
+    <Content Include="wooxtravel-1.0.0\vendor\jquery\jquery.min.js" />
+    <Content Include="wooxtravel-1.0.0\vendor\jquery\jquery.slim.js" />
+    <Content Include="wooxtravel-1.0.0\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Areas\Admin\Views\Message\Inbox.cshtml" />
+    <Content Include="Areas\Admin\Views\Message\Sendbox.cshtml" />
+    <Content Include="Areas\Admin\Views\Message\SendMessage.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\UpdateCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\InsertCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Cart\CartList.cshtml" />
+    <Content Include="Areas\Admin\Views\Cart\UpdateCart.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistics\StatisticsList.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistics\Chart.cshtml" />
+    <Content Include="DatPayment-master\DatPayment-master\.gitignore" />
+    <Content Include="DatPayment-master\DatPayment-master\bower.json" />
+    <Content Include="DatPayment-master\DatPayment-master\LICENSE" />
+    <Content Include="DatPayment-master\DatPayment-master\package.json" />
+    <Content Include="DatPayment-master\DatPayment-master\README.md" />
+    <Content Include="DatPayment-master\DatPayment-master\src\sass\DatPayment.scss" />
+    <Content Include="DatPayment-master\DatPayment-master\src\sass\_mixin.scss" />
+    <Content Include="DatPayment-master\DatPayment-master\src\sass\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Cart\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -655,6 +774,25 @@
     <Content Include="Views\ErrorPages\Page404.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Default\Index.cshtml" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="wooxtravel-1.0.0\assets\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="wooxtravel-1.0.0\vendor\jquery\jquery.min.map" />
+    <Content Include="wooxtravel-1.0.0\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Views\Default\PartialHead.cshtml" />
+    <Content Include="Views\Default\PartialScript.cshtml" />
+    <Content Include="Views\Default\PartialNavbar.cshtml" />
+    <Content Include="Views\Default\PartialBanner.cshtml" />
+    <Content Include="Views\Default\PartialCountry.cshtml" />
+    <Content Include="Views\Default\PartialFooter.cshtml" />
+    <Content Include="Views\Default\DestinationDetail.cshtml" />
+    <Content Include="Views\Default\ReservationPopup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -698,6 +836,27 @@
     <EmbeddedResource Include="Migrations\202410101901352_mig3.resx">
       <DependentUpon>202410101901352_mig3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410221732331_mig4.resx">
+      <DependentUpon>202410221732331_mig4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202410221744518_mig5.resx">
+      <DependentUpon>202410221744518_mig5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411022036023_mig6.resx">
+      <DependentUpon>202411022036023_mig6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411022048086_mig7.resx">
+      <DependentUpon>202411022048086_mig7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411152000409_mig8.resx">
+      <DependentUpon>202411152000409_mig8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411152005074_mig9.resx">
+      <DependentUpon>202411152005074_mig9.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

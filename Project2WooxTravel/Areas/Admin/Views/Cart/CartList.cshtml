@@ -1,0 +1,39 @@
+﻿@model List<Project2WooxTravel.Entities.Cart>
+@{
+    ViewBag.Title = "CartList";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<container>
+    <h2 class="mb-3" style="margin-left:25px">Kayıtlı Kartlarım</h2>
+
+    <table class="table table-bordered" style="margin-left:25px">
+        <tr>
+            <th>Kart Numarası</th>
+            <th>Ad Soyad</th>
+            <th>Son Kullanma Tarihi</th>
+            <th>CCV</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CartNumber</td>
+                <td>@item.NameSurname</td>
+                <td>@item.ExpDate</td>
+                <td>@item.Ccv</td>
+                <td><a href="#" class="btn btn-danger">Sil</a> </td>
+                <td><a href="/Admin/Cart/UpdateCart/@item.CartId" class="btn btn-info">Güncelle</a> </td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a href="#" class="btn btn-primary" style="margin-left:25px">Yeni Kart Girişi</a>
+    <br />
+</container>

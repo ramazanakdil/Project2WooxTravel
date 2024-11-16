@@ -1,0 +1,145 @@
+﻿@model Project2WooxTravel.ViewModel.ChartViewModel
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Chart";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+
+<div class="container mt-4">
+    <br /><br /><br /><br />
+    <h2 class="text-center">Grafikler</h2>
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Admin Sayısı</h5>
+                    <canvas id="adminChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Destinasyon Kapasiteleri</h5>
+                    <canvas id="capacityChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Destinasyon Fiyatları</h5>
+                    <canvas id="priceChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Başka Grafik</h5>
+                    <canvas id="anotherChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    var adminCtx = document.getElementById('adminChart').getContext('2d');
+    new Chart(adminCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Admin Sayısı'],
+            datasets: [{
+                data: [@ViewBag.AdminCount, 100 - @ViewBag.AdminCount],
+                backgroundColor: ['#3498db', '#ecf0f1']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Admin Sayısı' }
+            }
+        }
+    });
+
+
+    var capacityCtx = document.getElementById('capacityChart').getContext('2d');
+    new Chart(capacityCtx, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(JsonConvert.SerializeObject(ViewBag.DestinationTitles)),
+            datasets: [{
+                label: 'Kapasite',
+                data: @Html.Raw(JsonConvert.SerializeObject(ViewBag.DestinationCapacities)),
+                backgroundColor: '#2ecc71'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Destinasyon Kapasiteleri' }
+            }
+        }
+    });
+
+
+    var priceCtx = document.getElementById('priceChart').getContext('2d');
+    new Chart(priceCtx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(JsonConvert.SerializeObject(ViewBag.DestinationTitles)),
+            datasets: [{
+                label: 'Fiyat',
+                data: @Html.Raw(JsonConvert.SerializeObject(ViewBag.DestinationPrices)),
+                borderColor: '#e74c3c',
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Destinasyon Fiyatları' }
+            }
+        }
+    });
+
+
+    var anotherCtx = document.getElementById('anotherChart').getContext('2d');
+    new Chart(anotherCtx, {
+        type: 'doughnut',
+        data: {
+            labels: @Html.Raw(JsonConvert.SerializeObject(ViewBag.DestinationTitles)),
+            datasets: [{
+                label: 'Fiyat',
+                data: @Html.Raw(JsonConvert.SerializeObject(ViewBag.DestinationPrices)),
+                borderColor: '#e74c3c',
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Destinasyon Fiyatları' }
+            }
+        }
+    });
+
+    
+</script>

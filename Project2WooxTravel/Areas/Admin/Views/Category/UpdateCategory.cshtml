@@ -1,0 +1,34 @@
+﻿@model Project2WooxTravel.Entities.Category
+@{
+    ViewBag.Title = "UpdateCategory";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<br />
+<br /><br />
+
+<br />
+<h3 class="mb-3" style="margin-left:25px">Kategori Güncelleme Ekranı</h3>
+<br />
+
+<form method="post" class="p-4 border rounded shadow-sm bg-light">
+    <div class="form-group mb-3">
+        @Html.HiddenFor(x => x.CategoryId)
+
+        <label class="form-label fw-bold">Kategori Adı</label>
+        @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control", placeholder = "Kategori Adı Girin" })
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label fw-bold">Durum:</label>
+        <div class="form-check form-check-inline">
+            @Html.RadioButtonFor(model => model.CategoryStatus, true, new { id = "active", @class = "form-check-input" })
+            <label for="active" class="form-check-label ms-1">Aktif</label>
+        </div>
+        <div class="form-check form-check-inline">
+            @Html.RadioButtonFor(model => model.CategoryStatus, false, new { id = "inactive", @class = "form-check-input" })
+            <label for="inactive" class="form-check-label ms-1">Pasif</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+</form>
